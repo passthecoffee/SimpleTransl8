@@ -74,7 +74,7 @@
             for (const category in translations[selectedLanguage1]) {
                 if (translations[selectedLanguage1].hasOwnProperty(category)) {
                     const listItem = document.createElement("li");
-                    listItem.textContent = `${category}: <br> ${translations[selectedLanguage1][category]} - <br> ${translations[selectedLanguage2][category]}`;
+                    listItem.textContent = `${category}: ${translations[selectedLanguage1][category]} - ${translations[selectedLanguage2][category]}`;
                     translationList.appendChild(listItem);
                 }
             }
