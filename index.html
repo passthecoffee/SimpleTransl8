@@ -2,32 +2,32 @@
 <html>
 <head>
     <title>Language Translation</title>
+    <style>li{list-style:none￼;}</style>
 </head>
 <body>
-    <label for="languageSelect1"> me:</label>
+    <label for="languageSelect1">My Lingo</label>
     <select id="languageSelect1"></select>
 
-    <label for="languageSelect2">you:</label>
+    <label for="languageSelect2">Your Lingo</label>
     <select id="languageSelect2"></select>
 
-    <ul id="translationList">
-        <!-- Translation list will be displayed here -->
-    </ul>
+    <div id="translationContainer">
+        <!-- Translation lists will be displayed here -->
+    </div>
 
     <script>
-        // JSON data containing translations
         const translations = {
             "english": {
-                "greetings": "Hello", "good morning", "fancy a wank",
-                "colors": "Red",
-                "numbers": "One"
-                // Add more words and translations as needed
+                "greetings": ["Hello", "Hi", "Good morning", "Good afternoon", "Good evening", "Welcome"],
+                "colors": ["Red", "Blue", "Green", "Yellow", "Purple", "Orange"],
+                "numbers": ["One", "Two", "Three", "Four", "Five", "Six"],
+                // Add more categories and translations as needed
             },
             "welsh": {
-                "greetings": "Helo", "bore da", "dim diolch",
-                "colors": "Coch",
-                "numbers": "Un"
-                // Add more words and translations as needed
+                "greetings": ["Shwmae", "Helo", "bore da", "prynhawn da", "noswaith dda", "croeso"],
+                "colors": ["Coch", "Glas", "Green", "melyn", "porfor", "oren"],
+                "numbers": ["un", "dau", "tri", "pedwar", "pimp", "chwech"],
+                // Add translations for Welsh
             },
             "german": {
                 // Add translations for German
@@ -40,7 +40,7 @@
 
         const languageSelect1 = document.getElementById("languageSelect1");
         const languageSelect2 = document.getElementById("languageSelect2");
-        const translationList = document.getElementById("translationList");
+        const translationContainer = document.getElementById("translationContainer");
 
         // Populate both language dropdowns
         populateDropdown(languageSelect1);
@@ -62,20 +62,30 @@
             });
         }
 
-        // Function to update the translation list based on selections
+        // Function to update the translation lists based on selections
         function updateTranslationList() {
             const selectedLanguage1 = languageSelect1.value;
             const selectedLanguage2 = languageSelect2.value;
 
-            // Clear the previous list
-            translationList.innerHTML = "";
+            // Clear the previous lists
+            translationContainer.innerHTML = "";
 
             // Loop through categories (e.g., greetings, colors, numbers)
             for (const category in translations[selectedLanguage1]) {
                 if (translations[selectedLanguage1].hasOwnProperty(category)) {
-                    const listItem = document.createElement("li");
-                    listItem.textContent = `${category}: ${translations[selectedLanguage1][category]} - ${translations[selectedLanguage2][category]}`;
-                    translationList.appendChild(listItem);
+                    const categoryList = document.createElement("ul");
+                    categoryList.innerHTML = `<h3>${category}</h3>`;
+
+                    const words = translations[selectedLanguage1][category];
+                    const translationsToLanguage2 = translations[selectedLanguage2][category];
+
+                    for (let i = 0; i < words.length; i++) {
+                        const listItem = document.createElement("li");
+                        listItem.innerHTML = `<div style="color:red;">${words[i]}</div> <br> ${translationsToLanguage2[i]}`;
+                        categoryList.appendChild(listItem);
+                    }
+
+                    translationContainer.appendChild(categoryList);
                 }
             }
         }
