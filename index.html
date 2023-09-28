@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Language Translation</title>
+</head>
+<body>
+    <label for="languageSelect1">Select Language 1:</label>
+    <select id="languageSelect1"></select>
+
+    <label for="languageSelect2">Select Language 2:</label>
+    <select id="languageSelect2"></select>
+
+    <ul id="translationList">
+        <!-- Translation list will be displayed here -->
+    </ul>
+
+    <script>
+        // JSON data containing translations
+        const translations = {
+            "english": {
+                "greetings": "Hello",
+                "colors": "Red",
+                "numbers": "One"
+                // Add more words and translations as needed
+            },
+            "welsh": {
+                "greetings": "Helo",
+                "colors": "Coch",
+                "numbers": "Un"
+                // Add more words and translations as needed
+            },
+            "german": {
+                // Add translations for German
+            },
+            "spanish": {
+                // Add translations for Spanish
+            },
+            // Add translations for other languages
+        };
+
+        const languageSelect1 = document.getElementById("languageSelect1");
+        const languageSelect2 = document.getElementById("languageSelect2");
+        const translationList = document.getElementById("translationList");
+
+        // Populate both language dropdowns
+        populateDropdown(languageSelect1);
+        populateDropdown(languageSelect2);
+
+        // Listen for changes in both dropdowns
+        languageSelect1.addEventListener("change", updateTranslationList);
+        languageSelect2.addEventListener("change", updateTranslationList);
+
+        // Function to populate a language dropdown
+        function populateDropdown(selectElement) {
+            const languages = ["english", "welsh", "german", "spanish", "dutch", "portuguese", "maori", "italian", "french"];
+
+            languages.forEach((language) => {
+                const option = document.createElement("option");
+                option.value = language;
+                option.textContent = language.charAt(0).toUpperCase() + language.slice(1);
+                selectElement.appendChild(option);
+            });
+        }
+
+        // Function to update the translation list based on selections
+        function updateTranslationList() {
+            const selectedLanguage1 = languageSelect1.value;
+            const selectedLanguage2 = languageSelect2.value;
+
+            // Clear the previous list
+            translationList.innerHTML = "";
+
+            // Loop through categories (e.g., greetings, colors, numbers)
+            for (const category in translations[selectedLanguage1]) {
+                if (translations[selectedLanguage1].hasOwnProperty(category)) {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = `${category}: ${translations[selectedLanguage1][category]} - ${translations[selectedLanguage2][category]}`;
+                    translationList.appendChild(listItem);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
