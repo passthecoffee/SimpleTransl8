@@ -18,13 +18,13 @@
         // JSON data containing translations
         const translations = {
             "english": {
-                "greetings": "Hello",
+                "greetings": "Hello", "good morning", "fancy a wank",
                 "colors": "Red",
                 "numbers": "One"
                 // Add more words and translations as needed
             },
             "welsh": {
-                "greetings": "Helo",
+                "greetings": "Helo", "bore da", "dim diolch",
                 "colors": "Coch",
                 "numbers": "Un"
                 // Add more words and translations as needed
@@ -74,7 +74,7 @@
             for (const category in translations[selectedLanguage1]) {
                 if (translations[selectedLanguage1].hasOwnProperty(category)) {
                     const listItem = document.createElement("li");
-                    listItem.textContent = `${category}: ${translations[selectedLanguage1][category]} - ${translations[selectedLanguage2][category]}`;
+                    listItem.textContent = `${category}: <br> ${translations[selectedLanguage1][category]} - <br> ${translations[selectedLanguage2][category]}`;
                     translationList.appendChild(listItem);
                 }
             }
